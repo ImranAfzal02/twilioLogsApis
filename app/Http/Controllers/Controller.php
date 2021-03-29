@@ -17,6 +17,24 @@ class Controller extends BaseController {
         $this->twilio = new Client($this->sid, $this->token);
     }
 
+    public function login(Request $request) {
+        if ($request->email == env('AUTH_EMAIL') && $request->password == env('PASSWORD')) {
+            return response()->json([
+                'status' => env('STATUS_OK'),
+                'message' => 'Logged-In successfully',
+                'data' => [
+                    'token' => hash('sha256', time())
+                ]
+            ], env('STATUS_OK'));
+        } else {
+            return response()->json([
+                'status' => env('STATUS_NOT_FOUND'),
+                'message' => 'Invalid email or password',
+                'data' => []
+            ], env('STATUS_OK'));
+        }
+    }
+
     public function getCallLogs() {
         try {
 

@@ -17,6 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('login', 'Controller@login');
 $router->get('get-all-logs', 'Controller@getCallLogs');
 $router->post('filter-call-logs', 'Controller@filterCallLogs');
 $router->post('filter-message-logs', 'Controller@filterMessageLogs');
