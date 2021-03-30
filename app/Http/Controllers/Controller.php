@@ -38,9 +38,9 @@ class Controller extends BaseController {
     public function getCallLogs() {
         try {
 
-            $calls = $this->twilio->calls->read();
+            $calls = $this->twilio->calls->read([], 150);
 
-            $messages = $this->twilio->messages->read();
+            $messages = $this->twilio->messages->read([], 150);
 
             $callLogs = $messageLogs = [];
 
@@ -114,7 +114,7 @@ class Controller extends BaseController {
                         'to' => $message->to,
                         'body' => $message->body,
                         'direction' => $message->direction,
-                            'dateSent' => Carbon::parse($message->dateSent)->format('Y-m-d H:i:s')
+                        'dateSent' => Carbon::parse($message->dateSent)->format('Y-m-d H:i:s')
                     ];
                 }
             }
